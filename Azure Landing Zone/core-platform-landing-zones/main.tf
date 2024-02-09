@@ -54,7 +54,6 @@ module "networking_firewall" {
   providers = {
     azurerm.hub = azurerm.hub_platform
   }
-
   environment                  = var.environment
   hub_vnet_id                  = module.networking_hub.hub_vnet.hub_vnet_id
   hub_vnet_resource_group_name = module.networking_hub.hub_vnet.hub_vnet_resource_group_name
@@ -119,6 +118,8 @@ module "monitoring_service_health_alerts_mgmt" {
   monitoring_rg_name             = module.monitoring_workspaces.workspaces.monitoring_rg_name
 }
 
+#---------------------------------------------------------------------------------------------#
+
 module "monitoring_service_health_alerts_identity" {
   source = "./modules/monitoring/service_health_alerts_identity"
 
@@ -140,3 +141,40 @@ module "monitoring_service_health_alerts_hub" {
   environment                    = var.environment
   service_health_action_group_id = module.monitoring_action_groups.monitoring_action_group_ids.service_health
 }
+
+#---------------------------------------------------------------------------------------------#
+
+module "monitoring_platform_alert_rules" {
+  source = "./modules/monitoring/platform_alert_rules"
+
+  providers = {
+    azurerm.management = azurerm.management_platform
+  }
+
+  environment              = var.environment
+  awcs_ops_action_group_id = module.monitoring_action_groups.monitoring_action_group_ids.awcs_ops
+  sec_ops_action_group_id  = module.monitoring_action_groups.monitoring_action_group_ids.sec_ops
+  monitoring_rg_name       = module.monitoring_workspaces.workspaces.monitoring_rg_name
+}
+
+#---------------------------------------------------------------------------------------------#
+
+module "policies_flybuys_management_group" {
+  source = "./modules/policies/flybuys_management_group"
+
+  providers = {
+    azurerm.management = azurerm.management_platform
+  }
+
+  environment = var.environment
+}
+
+# module "security_flybuys_ca_management" {
+#   source = "./modules/security/ca_policy"
+
+#   providers = {
+#     azuread.hub = azuread.hub_azuread
+#     azurerm.hub = azurerm.hub_platform
+#   }
+#   environment = var.environment
+# }
