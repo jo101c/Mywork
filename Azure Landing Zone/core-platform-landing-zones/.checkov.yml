@@ -1,0 +1,22 @@
+soft-fail: true
+download-external-modules: true
+evaluate-variables: true
+external-modules-download-path: .external_modules
+repo-root-for-plan-enrichment: .
+no-guide: false
+output: cli
+skip-fixes: false
+framework: all
+skip-framework:
+- json
+skip-suppressions: false
+skip-path:
+- yaml.out
+- venv
+- build
+- python
+- bucket_policys
+- node_modules
+- test
+- tests
+

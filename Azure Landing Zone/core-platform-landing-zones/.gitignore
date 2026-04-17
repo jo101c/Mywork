@@ -1,0 +1,51 @@
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Module-specific files
+**/.terraform/*
+# **/.terraform.lock.hcl
+
+# Override files which can be used to override default attribute values
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Logs
+*.log
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Ignore any .env files
+*.env
+
+# Ignore .terragrunt-cache
+.terragrunt-cache/
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore files related to JetBrains IDEs
+.idea/
+*.iml
+
+# Terraform Cloud .envrc
+.envrc
+
+# Azure CLI
+azureProfile.json
+accessTokens.json
+
+# Ignore sensitive information
+credentials.json
+secrets.tfvars

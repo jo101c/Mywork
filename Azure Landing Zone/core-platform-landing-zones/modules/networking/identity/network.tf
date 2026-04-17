@@ -5,10 +5,10 @@
 resource "azurerm_virtual_network" "default" {
   provider = azurerm.identity
 
-  name                = "vnet-ae-${var.environment == "prod" ? "pr" : "np"}-platform-identity"
+  name                = "vnet-example-${var.environment == "prod" ? "pr" : "np"}-platform-identity"
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
-  address_space       = var.environment == "prod" ? ["10.10.128.0/20"] : ["10.10.144.0/20"]
+  address_space       = var.environment == "prod" ? ["10.20.0.0/20"] : ["10.20.16.0/20"]
 
   tags = local.tags
 }
@@ -23,7 +23,7 @@ resource "azurerm_subnet" "adds" {
   name                 = "snet-aads"
   resource_group_name  = azurerm_resource_group.default.name
   virtual_network_name = azurerm_virtual_network.default.name
-  address_prefixes     = var.environment == "prod" ? ["10.10.128.0/27"] : ["10.10.144.0/27"]
+  address_prefixes     = var.environment == "prod" ? ["10.20.0.0/27"] : ["10.20.16.0/27"]
 }
 
 resource "azurerm_subnet" "management" {
@@ -32,13 +32,12 @@ resource "azurerm_subnet" "management" {
   name                 = "snet-management"
   resource_group_name  = azurerm_resource_group.default.name
   virtual_network_name = azurerm_virtual_network.default.name
-  address_prefixes     = var.environment == "prod" ? ["10.10.128.128/25"] : ["10.10.144.128/25"]
+  address_prefixes     = var.environment == "prod" ? ["10.20.0.128/25"] : ["10.20.16.128/25"]
 }
 
 #----------------------------------------------------------------------------------------------#
 #                                           Peerings                                           #
 #----------------------------------------------------------------------------------------------#
-
 
 resource "azurerm_virtual_network_peering" "identity_to_hub" {
   provider = azurerm.identity
@@ -67,7 +66,6 @@ resource "azurerm_virtual_network_peering" "hub_to_identity" {
 #                                    Diagnostic Settings                                       #
 #----------------------------------------------------------------------------------------------#
 
-
 resource "azurerm_monitor_diagnostic_setting" "default" {
   provider = azurerm.identity
 
@@ -78,6 +76,5 @@ resource "azurerm_monitor_diagnostic_setting" "default" {
 
   metric {
     category = "AllMetrics"
-
   }
 }

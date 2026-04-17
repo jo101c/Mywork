@@ -8,7 +8,7 @@ module "lz_vending" {
 
   # subscription variables
   subscription_alias_enabled = true
-  subscription_billing_scope = "/providers/Microsoft.Billing/billingAccounts/68173652/enrollmentAccounts/${each.value.billing_enrollment_account}"
+  subscription_billing_scope = "/providers/Microsoft.Billing/billingAccounts/<id>/enrollmentAccounts/${each.value.billing_enrollment_account}"
   subscription_display_name  = each.value.name
   subscription_alias_name    = each.value.name
   subscription_workload      = each.value.workload

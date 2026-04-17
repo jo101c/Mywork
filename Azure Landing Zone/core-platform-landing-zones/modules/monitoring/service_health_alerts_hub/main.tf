@@ -19,7 +19,7 @@ resource "azurerm_monitor_activity_log_alert" "service_health_hub" {
 
   name                = "service-health-platform-hub"
   resource_group_name = var.environment == "prod" ? azurerm_resource_group.default[0].name : ""
-  scopes              = ["/subscriptions/64c740c5-c455-4f78-b78a-a080fad5becb"]
+  scopes              = ["/subscriptions/<subid>"]
   description         = "Service Health Alerts for Platform Hub Subscription"
   enabled             = true
 

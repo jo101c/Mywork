@@ -5,10 +5,10 @@
 resource "azurerm_virtual_network" "default" {
   provider = azurerm.management
 
-  name                = "vnet-ae-${var.environment == "prod" ? "pr" : "np"}-platform-mgmt"
+  name                = "vnet-example-${var.environment == "prod" ? "pr" : "np"}-platform-mgmt"
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
-  address_space       = var.environment == "prod" ? ["10.10.176.0/20"] : ["10.10.192.0/20"]
+  address_space       = var.environment == "prod" ? ["10.30.0.0/20"] : ["10.30.16.0/20"]
 
   tags = local.tags
 }
@@ -23,7 +23,7 @@ resource "azurerm_subnet" "management" {
   name                 = "snet-management"
   resource_group_name  = azurerm_resource_group.default.name
   virtual_network_name = azurerm_virtual_network.default.name
-  address_prefixes     = var.environment == "prod" ? ["10.10.176.0/24"] : ["10.10.192.0/24"]
+  address_prefixes     = var.environment == "prod" ? ["10.30.0.0/24"] : ["10.30.16.0/24"]
 }
 
 #----------------------------------------------------------------------------------------------#
@@ -57,7 +57,6 @@ resource "azurerm_virtual_network_peering" "hub_to_management" {
 #                                    Diagnostic Settings                                       #
 #----------------------------------------------------------------------------------------------#
 
-
 resource "azurerm_monitor_diagnostic_setting" "default" {
   provider = azurerm.management
 
@@ -68,6 +67,5 @@ resource "azurerm_monitor_diagnostic_setting" "default" {
 
   metric {
     category = "AllMetrics"
-
   }
 }

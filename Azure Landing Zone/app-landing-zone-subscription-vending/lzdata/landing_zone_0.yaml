@@ -1,5 +1,5 @@
 name: add-your-subscription-here
 workload: Production
 location: australiaeast
-billing_enrollment_account: 272395
+billing_enrollment_account: <billing_id>
 management_group_id: add-your-management-group-here

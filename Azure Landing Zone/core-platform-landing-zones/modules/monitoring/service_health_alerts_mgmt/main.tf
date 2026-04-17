@@ -10,7 +10,7 @@ resource "azurerm_monitor_activity_log_alert" "service_health_mgmt" {
 
   name                = "service-health-platform-mgmt"
   resource_group_name = var.monitoring_rg_name
-  scopes              = ["/subscriptions/48c5ee80-e91b-4294-ba0e-6f21a11dd870"]
+  scopes              = ["/subscriptions/<subid>"]
   description         = "Service Health Alerts for Platform Management Subscription"
   enabled             = true
 

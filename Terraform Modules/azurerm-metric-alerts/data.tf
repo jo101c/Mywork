@@ -1,8 +1,8 @@
 data "azurerm_resource_group" "default" {
-  name = "ambit-shared-syd-prd-rg"
+  name = "rg_name"
 }
 
 data "azurerm_monitor_action_group" "ambit_team" {
-  name                = "Ambit Application Management Team"
-  resource_group_name = "ambit-syd-prd-rg"
+  name                = "Application Management Team"
+  resource_group_name = "rg_name"
 }

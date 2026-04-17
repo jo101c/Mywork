@@ -1,0 +1,109 @@
+include:
+  - template: Security/Secret-Detection.gitlab-ci.yml
+
+secret_detection:
+  rules:
+    - when: never
+
+stages:
+- Authentication
+- Quality
+- Initialization
+- Plan
+- checkov
+- Apply
+
+image: ubuntu:latest
+before_script:
+  - apt-get update && apt-get install -y curl unzip wget jq
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+  - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.5.6/terraform_1.5.6_linux_amd64.zip
+  - unzip terraform.zip
+  - mv terraform /usr/local/bin/
+  - terraform --version
+  - export ARM_OIDC_TOKEN=$GITLAB_OIDC_TOKEN
+  - export TF_VAR_environment=$CI_ENVIRONMENT_NAME
+  - "if [ \"$CI_ENVIRONMENT_NAME\" == \"prod\" ]; then \n  export TF_VAR_ARM_IDENTITY_SUBSCRIPTION_ID=$PROD_IDENTITY_SUBSCRIPTION_ID;\n\
+  \  export TF_VAR_ARM_MANAGEMENT_SUBSCRIPTION_ID=$PROD_MANAGEMENT_SUBSCRIPTION_ID;\n\
+  \  export TF_VAR_ARM_HUB_SUBSCRIPTION_ID=$PROD_HUB_SUBSCRIPTION_ID;\n  export TF_VAR_CLIENT_ID=$PROD_CLIENT_ID;\n\
+  else \n  export TF_VAR_ARM_IDENTITY_SUBSCRIPTION_ID=$NON_PROD_IDENTITY_SUBSCRIPTION_ID;\n\
+  \  export TF_VAR_ARM_MANAGEMENT_SUBSCRIPTION_ID=$NON_PROD_MANAGEMENT_SUBSCRIPTION_ID;\n\
+  \  export TF_VAR_ARM_HUB_SUBSCRIPTION_ID=$NON_PROD_HUB_SUBSCRIPTION_ID;\n  export TF_VAR_CLIENT_ID=$NON_PROD_CLIENT_ID; \nfi\n"
+Auth OpenID Verification:
+  stage: Authentication
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  script:
+  - az login --service-principal -u $AZURE_CLIENT_ID -t $AZURE_TENANT_ID --federated-token
+    $GITLAB_OIDC_TOKEN
+  - az account show
+  environment:
+    name: $CI_ENVIRONMENT_NAME
+  rules:
+  - if: $CI_COMMIT_BRANCH == "main"
+    variables:
+      CI_ENVIRONMENT_NAME: prod
+  - if: $CI_COMMIT_BRANCH == "nonprod" || $CI_COMMIT_REF_NAME =~ /^feature\//
+    variables:
+      CI_ENVIRONMENT_NAME: nonprod
+Terraform Format:
+  stage: Quality
+  script:
+  - terraform fmt -recursive -check -diff
+terraform init:
+  stage: Initialization
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  script:
+  - terraform init -input=false -backend-config="key=$TF_BACKEND_KEY" -backend-config="resource_group_name=$TF_BACKEND_RESOURCE_GROUP_NAME"
+    -backend-config="storage_account_name=$TF_BACKEND_STORAGE_ACCOUNT_NAME" -backend-config="container_name=$TF_BACKEND_CONTAINER_NAME"
+  artifacts:
+    paths:
+    - .terraform/
+    - .terraform.lock.hcl
+  environment:
+    name: $CI_ENVIRONMENT_NAME
+  rules:
+  - if: $CI_COMMIT_BRANCH == "main"
+    variables:
+      CI_ENVIRONMENT_NAME: prod
+  - if: $CI_COMMIT_BRANCH == "nonprod" || $CI_COMMIT_REF_NAME =~ /^feature\//
+    variables:
+      CI_ENVIRONMENT_NAME: nonprod
+terraform plan:
+  stage: Plan
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  script:
+  - terraform plan -input=false
+  environment:
+    name: $CI_ENVIRONMENT_NAME
+  rules:
+  - if: $CI_COMMIT_BRANCH == "main"
+    variables:
+      CI_ENVIRONMENT_NAME: prod
+  - if: $CI_COMMIT_BRANCH == "nonprod" || $CI_COMMIT_REF_NAME =~ /^feature\//
+    variables:
+      CI_ENVIRONMENT_NAME: nonprod
+terraform apply:
+  stage: Apply
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  script:
+  - terraform apply -auto-approve -input=false
+  dependencies:
+  - terraform init
+  environment:
+    name: $CI_ENVIRONMENT_NAME
+  rules:
+  - if: $CI_COMMIT_BRANCH == "main"
+    variables:
+      CI_ENVIRONMENT_NAME: prod
+  - if: $CI_COMMIT_BRANCH == "nonprod"
+    variables:
+      CI_ENVIRONMENT_NAME: nonprod
+  when: manual

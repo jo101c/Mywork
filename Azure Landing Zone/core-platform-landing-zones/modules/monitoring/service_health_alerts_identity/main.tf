@@ -19,7 +19,7 @@ resource "azurerm_monitor_activity_log_alert" "service_health_identity" {
 
   name                = "service-health-platform-identity"
   resource_group_name = var.environment == "prod" ? azurerm_resource_group.default[0].name : ""
-  scopes              = ["/subscriptions/c6229714-28a5-4683-a0b2-74856f89dd2f"]
+  scopes              = ["/subscriptions/<subid>"]
   description         = "Service Health Alerts for Platform Identity Subscription"
   enabled             = true
 

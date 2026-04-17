@@ -159,8 +159,8 @@ module "monitoring_platform_alert_rules" {
 
 #---------------------------------------------------------------------------------------------#
 
-module "policies_flybuys_management_group" {
-  source = "./modules/policies/flybuys_management_group"
+module "policies_company_management_group" {
+  source = "./modules/policies/company_management_group"
 
   providers = {
     azurerm.management = azurerm.management_platform
@@ -169,7 +169,7 @@ module "policies_flybuys_management_group" {
   environment = var.environment
 }
 
-# module "security_flybuys_ca_management" {
+# module "security_company_ca_management" {
 #   source = "./modules/security/ca_policy"
 
 #   providers = {

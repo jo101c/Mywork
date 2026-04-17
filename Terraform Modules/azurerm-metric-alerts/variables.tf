@@ -4,7 +4,7 @@ variable "sql_metric_alerts" {
   type = map(string)
   default = {
     name             = "Alert Prod SQL DB"
-    # scopes           = ["/subscriptions/7785f4d2-6931-457d-b4f9-f6cb5277ede5/resourceGroups/ambit-syd-prd-rg/providers/Microsoft.Sql/servers/ambit-staging-syd-prd-sql/databases/AmbitAssetFinance_GeoRestore"]
+    # scopes           = ["/subscriptions/*"]
     description      = "Alerts for Prod SQL"
     frequency        = "PT5M"
     severity         = 2
@@ -17,7 +17,7 @@ variable "vm_metric_alerts" {
   type = map(string)
   default = {
     name             = "Alert Prod VM"
-    #scopes          = ["/subscriptions/7785f4d2-6931-457d-b4f9-f6cb5277ede5/resourceGroups/AMBIT-SYD-PRD-RG"]
+    #scopes          = ["/subscriptions/*]
     description      = "Alerts for Prod App & Web Servers"
     frequency        = "PT1M"
     severity         = 2
@@ -41,12 +41,12 @@ variable "tags" {
 variable "scopes_sql" {
   description = "(Required) Scope of resources to be deployed"
   type        = list(string)
-  default     = ["/subscriptions/7785f4d2-6931-457d-b4f9-f6cb5277ede5/resourceGroups/ambit-syd-prd-rg/providers/Microsoft.Sql/servers/ambit-staging-syd-prd-sql/databases/AmbitAssetFinance_GeoRestore"]
+  default     = ["/subscriptions/*"]
 }
 
 # Scopes for vm resources
 variable "scopes_vm" {
   description = "(Required) Scope of resources to be deployed"
   type        = list(string)
-  default     = ["/subscriptions/7785f4d2-6931-457d-b4f9-f6cb5277ede5/resourceGroups/AMBIT-SYD-PRD-RG"]
+  default     = ["/subscriptions/*"]
 }

@@ -5,10 +5,10 @@
 resource "azurerm_virtual_network" "hub_vnet" {
   provider = azurerm.hub
 
-  name                = "vnet-ae-${var.environment == "prod" ? "pr" : "np"}-platform-hub"
+  name                = "vnet-example-${var.environment == "prod" ? "pr" : "np"}-platform-hub"
   location            = azurerm_resource_group.hub_vnet.location
   resource_group_name = azurerm_resource_group.hub_vnet.name
-  address_space       = var.environment == "prod" ? ["10.11.0.0/22"] : ["10.12.0.0/22"]
+  address_space       = var.environment == "prod" ? ["10.0.0.0/22"] : ["10.0.4.0/22"]
 
   tags = local.tags
 }
@@ -23,7 +23,7 @@ resource "azurerm_subnet" "gateway" {
   name                 = "GatewaySubnet"
   resource_group_name  = azurerm_resource_group.hub_vnet.name
   virtual_network_name = azurerm_virtual_network.hub_vnet.name
-  address_prefixes     = var.environment == "prod" ? ["10.11.0.0/24"] : ["10.12.0.0/24"]
+  address_prefixes     = var.environment == "prod" ? ["10.0.0.0/24"] : ["10.0.4.0/24"]
 }
 
 resource "azurerm_subnet" "azurefirewall" {
@@ -32,7 +32,7 @@ resource "azurerm_subnet" "azurefirewall" {
   name                 = "AzureFirewallSubnet"
   resource_group_name  = azurerm_resource_group.hub_vnet.name
   virtual_network_name = azurerm_virtual_network.hub_vnet.name
-  address_prefixes     = var.environment == "prod" ? ["10.11.1.0/26"] : ["10.12.1.0/26"]
+  address_prefixes     = var.environment == "prod" ? ["10.0.1.0/26"] : ["10.0.5.0/26"]
 }
 
 resource "azurerm_subnet" "azurebastion" {
@@ -41,13 +41,12 @@ resource "azurerm_subnet" "azurebastion" {
   name                 = "AzureBastionSubnet"
   resource_group_name  = azurerm_resource_group.hub_vnet.name
   virtual_network_name = azurerm_virtual_network.hub_vnet.name
-  address_prefixes     = var.environment == "prod" ? ["10.11.1.64/26"] : ["10.12.1.64/26"]
+  address_prefixes     = var.environment == "prod" ? ["10.0.1.64/26"] : ["10.0.5.64/26"]
 }
 
 #----------------------------------------------------------------------------------------------#
 #                                    Diagnostic Settings                                       #
 #----------------------------------------------------------------------------------------------#
-
 
 resource "azurerm_monitor_diagnostic_setting" "default" {
   provider = azurerm.hub
@@ -59,6 +58,5 @@ resource "azurerm_monitor_diagnostic_setting" "default" {
 
   metric {
     category = "AllMetrics"
-
   }
 }
