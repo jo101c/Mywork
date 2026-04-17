@@ -6,6 +6,7 @@
 
 ## Overview
 
+
 This repository contains a modular **Azure Landing Zone implementation** built using Terraform, aligned to enterprise design patterns.
 
 It demonstrates how to design and deploy a scalable, secure, and repeatable Azure platform using:
@@ -21,6 +22,7 @@ This is a **sanitised example** based on real-world enterprise implementations. 
 ---
 
 ## Architecture Summary
+
 
 The platform follows a **hub-and-spoke model**:
 
@@ -45,6 +47,7 @@ The platform follows a **hub-and-spoke model**:
 ---
 
 ## Repository Structure
+
 
 ```bash
 modules/
@@ -81,6 +84,7 @@ data.tf
 
 ### Key Points
 
+
 * **modules/networking**
   Contains core platform networking components, including:
 
@@ -109,6 +113,7 @@ data.tf
 
 ## Design Decisions
 
+
 * **Hub-Spoke Architecture**
   Enables centralised control of network traffic, security, and shared services.
 
@@ -130,6 +135,7 @@ data.tf
 
 ### Prerequisites
 
+
 * Terraform
 * Git
 * Azure CLI or OIDC-based authentication
@@ -138,6 +144,7 @@ data.tf
 ---
 
 ### Clone Repository
+
 
 ```bash
 git clone <repository-url>
@@ -148,6 +155,7 @@ git checkout -b feature/<your-feature-name>
 ---
 
 ### Working with the Code
+
 
 1. Navigate to the relevant module or root configuration
 2. Make changes
@@ -164,6 +172,7 @@ terraform plan
 
 ## Deployment Workflow
 
+
 Deployments are handled via CI/CD pipeline:
 
 * **Plan** runs automatically on merge request
@@ -173,6 +182,7 @@ Deployments are handled via CI/CD pipeline:
 ---
 
 ## Best Practices
+
 
 * **Keep modules focused and composable**
 * **Avoid hardcoding sensitive data** (use Key Vault or pipeline variables)
@@ -184,6 +194,7 @@ Deployments are handled via CI/CD pipeline:
 ---
 
 ## What This Repository Demonstrates
+
 
 * Enterprise Azure Landing Zone design
 * Network segmentation and hub-spoke architecture

@@ -4,6 +4,7 @@
 
 ---
 
+
 ## Overview
 
 This repository implements an **Azure Landing Zone Subscription Vending solution** using Terraform.
@@ -34,6 +35,7 @@ This solution addresses that by:
 
 ---
 
+
 ## How It Works
 
 ### 1. YAML-Driven Configuration
@@ -51,6 +53,7 @@ management_group_id: example-mg
 Each YAML file represents a **landing zone subscription**.
 
 ---
+
 
 ### 2. Dynamic File Processing (locals.lzvending.tf)
 
@@ -72,6 +75,7 @@ This enables:
 
 ---
 
+
 ### 3. Subscription Deployment (main.lzvending.tf)
 
 Each YAML definition is deployed using:
@@ -87,6 +91,7 @@ The module provisions:
 * Management group assignment
 
 ---
+
 
 ## Repository Structure
 
