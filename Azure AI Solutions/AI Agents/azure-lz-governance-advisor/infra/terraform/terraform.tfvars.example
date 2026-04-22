@@ -1,0 +1,32 @@
+subscription_id = "00000000-0000-0000-0000-000000000000"
+
+location            = "australiaeast"
+resource_group_name = "rg-lzadvisor-dev-aue"
+environment         = "dev"
+
+# The account name is used as a custom subdomain and must be globally unique.
+openai_account_name = "oai-lzadvisor-dev-aue001"
+
+# Current working model/deployment for this project:
+# gpt-4.1-mini / gpt-4-1-mini-lzadvisor
+model_deployment_name = "gpt-4-1-mini-lzadvisor"
+model_name            = "gpt-4.1-mini"
+model_version         = "2025-04-14"
+model_sku_name        = "GlobalStandard"
+model_capacity        = 10
+
+budget_amount         = 25
+budget_contact_emails = ["you@example.com"]
+budget_start_date     = "2026-04-01T00:00:00Z"
+
+# Keep this false for the cheapest v1. Enable only when you want Foundry tracing.
+enable_application_insights = false
+enable_local_auth           = true
+
+tags = {
+  workload      = "landing-zone-governance-advisor"
+  environment   = "dev"
+  owner         = "you@example.com"
+  cost-control  = "delete-after-demo"
+  deployed-with = "terraform"
+}
