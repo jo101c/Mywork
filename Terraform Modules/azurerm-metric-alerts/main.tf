@@ -4,7 +4,6 @@ resource "azurerm_monitor_metric_alert" "metric_alerts_sql" {
 
   for_each = local.criteria_sql
 
-  provider            = azurerm
   name                = each.value.alert_name
   resource_group_name = data.azurerm_resource_group.default.name
   scopes              = var.scopes_sql
@@ -36,7 +35,6 @@ resource "azurerm_monitor_metric_alert" "metric_alerts_vm" {
 
   for_each = local.criteria_vm
 
-  provider            = azurerm
   name                = each.value.alert_name
   resource_group_name = data.azurerm_resource_group.default.name
   scopes              = var.scopes_vm

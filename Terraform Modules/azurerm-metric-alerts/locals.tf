@@ -44,8 +44,8 @@ locals {
       threshold        = "20"
     }
   }
- 
- #VM Alert rules
+
+  #VM Alert rules
   criteria_vm = {
     cpu = {
       alert_name       = "VM CPU Alert"

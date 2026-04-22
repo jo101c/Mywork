@@ -1,0 +1,24 @@
+# Terraform working directory and dependency cache
+**/.terraform/*
+
+# Terraform state and plan artifacts
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Local environment files
+.env
+.env.*
+terraform.rc
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db

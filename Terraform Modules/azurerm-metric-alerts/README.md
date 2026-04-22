@@ -93,6 +93,9 @@ Key configurable inputs:
 
 * `scopes_sql` → Target SQL resources
 * `scopes_vm` → Target VM resources
+* `resource_group_name` → Resource group that hosts the alert rules
+* `action_group_name` → Existing Azure Monitor Action Group to notify
+* `action_group_resource_group_name` → Optional override when the action group lives elsewhere
 * `sql_metric_alerts` → SQL alert configuration
 * `vm_metric_alerts` → VM alert configuration
 * `tags` → Standardised tagging
@@ -117,6 +120,8 @@ providers.tf    # Provider configuration
 module "metric_alerts" {
   source = "./modules/azurerm-metric-alerts"
 
+  resource_group_name = "rg-monitoring-prod"
+  action_group_name   = "ag-platform-ops"
   scopes_sql = ["/subscriptions/<subscription-id>"]
   scopes_vm  = ["/subscriptions/<subscription-id>"]
 
@@ -171,6 +176,7 @@ module "metric_alerts" {
 ## Notes
 
 * This module assumes an existing **Azure Monitor Action Group** is available
+* Authentication should be supplied by the calling root module, Azure CLI session, or OIDC pipeline identity
 * Metric validation is skipped (`skip_metric_validation = true`) to support flexible deployment scenarios
 * Default thresholds and values are examples and should be tuned per environment
 

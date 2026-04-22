@@ -83,6 +83,9 @@ Terraform Modules/
 
 This repository is a **sanitised example** based on real-world enterprise implementations.
 All sensitive values, naming, and IP ranges have been modified for demonstration purposes.
+Terraform state files, plan files, local variable files, and environment files are intentionally excluded from version control via `.gitignore`.
+
+Authentication and environment-specific identifiers should be supplied at runtime using Azure CLI, managed identity/OIDC, pipeline variables, or non-committed `*.tfvars` files.
 
 ---
 
