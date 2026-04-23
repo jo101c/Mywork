@@ -8,7 +8,7 @@ Sensitive data, naming conventions, and IP ranges have been modified for demonst
 
 ## Overview
 
-This repository showcases a **modular Azure platform implementation** built using Terraform, aligned to enterprise landing zone and cloud governance patterns.
+This repository showcases a **modular Azure platform engineering portfolio** spanning Terraform-based landing zones, cloud governance, DevOps, and Azure AI solutions.
 
 It demonstrates end-to-end platform design, including:
 
@@ -16,6 +16,9 @@ It demonstrates end-to-end platform design, including:
 * Subscription vending (YAML-driven)
 * Terraform backend (launchpad pattern)
 * Monitoring and alerting modules
+* AI governance advisory agents
+* Microsoft Foundry / Azure OpenAI integration
+* Cost-conscious AI implementation patterns
 * CI/CD and DevSecOps practices
 
 ---
@@ -23,6 +26,10 @@ It demonstrates end-to-end platform design, including:
 ## Repository Structure
 
 ```
+Azure AI Solutions/
+  AI Agents/
+    azure-lz-governance-advisor/
+
 Azure Landing Zone/
   app-landing-zone-subscription-vending/
   core-platform-landing-zones/
@@ -35,6 +42,16 @@ Terraform Modules/
 ---
 
 ## Key Components
+
+### AI Solutions
+
+* `azure-lz-governance-advisor` demonstrates an Azure AI governance agent that reviews landing zone evidence against Cloud Adoption Framework guidance
+* Uses Microsoft Foundry, Azure OpenAI, Terraform scaffolding, and GitHub OIDC workflows
+* Produces governance findings, missing evidence, and 30/60/90-day remediation roadmaps
+* Designed as a portfolio-ready, low-cost AI implementation that complements the platform engineering projects in this repository
+* See the project README for the full walkthrough and setup details
+
+---
 
 ### Platform Landing Zones
 
@@ -74,18 +91,11 @@ Terraform Modules/
 * Enterprise Azure platform design
 * Terraform module architecture at scale
 * Cloud governance and subscription lifecycle management
+* Applied AI for governance automation
+* Prompt engineering and AI solution design
+* Azure AI architecture using Microsoft Foundry / Azure OpenAI
 * DevOps and CI/CD integration
 * Real-world platform engineering patterns
-
----
-
-## Notes
-
-This repository is a **sanitised example** based on real-world enterprise implementations.
-All sensitive values, naming, and IP ranges have been modified for demonstration purposes.
-Terraform state files, plan files, local variable files, and environment files are intentionally excluded from version control via `.gitignore`.
-
-Authentication and environment-specific identifiers should be supplied at runtime using Azure CLI, managed identity/OIDC, pipeline variables, or non-committed `*.tfvars` files.
 
 ---
 
