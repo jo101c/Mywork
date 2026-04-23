@@ -39,12 +39,12 @@ The first version uses curated sample evidence instead of live Azure scanning. T
 
 ```mermaid
 flowchart LR
-    User["You in Microsoft Foundry portal"] --> Agent["Prompt agent: alz-governance-advisor"]
+    User["Microsoft Foundry portal"] --> Agent["Prompt agent: alz-governance-advisor"]
     Agent --> Model["Azure OpenAI model deployment"]
     Agent -. optional .-> Files["Uploaded sample evidence / file search"]
     Agent -. optional .-> Traces["Application Insights tracing"]
     GitHub["GitHub repo"] --> Actions["GitHub Actions with OIDC"]
-    Actions --> Terraform["Terraform scaffold"]
+    Actions --> Terraform["Terraform"]
     Terraform --> Azure["Azure resource group, budget, Azure OpenAI, optional App Insights"]
 ```
 
