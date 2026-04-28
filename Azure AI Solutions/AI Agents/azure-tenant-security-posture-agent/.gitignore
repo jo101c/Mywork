@@ -1,0 +1,14 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.pyc
+__pycache__/
+.python_packages/
+.venv/
+local.settings.json
+terraform.rc
+dist/
+build/
+reports/
+
