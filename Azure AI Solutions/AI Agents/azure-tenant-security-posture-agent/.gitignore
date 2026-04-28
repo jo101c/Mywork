@@ -1,9 +1,12 @@
 .terraform/
+**/.terraform/
 *.tfstate
 *.tfstate.*
 *.tfvars
 *.pyc
+*.pyo
 __pycache__/
+**/__pycache__/
 .python_packages/
 .venv/
 local.settings.json
@@ -11,4 +14,3 @@ terraform.rc
 dist/
 build/
 reports/
-

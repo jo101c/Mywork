@@ -2,7 +2,7 @@
 
 An Azure-native AI security specialist agent that performs daily tenant-wide security posture assessment, generates a PDF report, delivers it to email and Teams, and supports engineer follow-up Q&A about findings.
 
-Future version 2.0 will allow the engineer to choose to take a remediation action against the vunerability, and have a change request automatically submitted for approval / reviews. 
+Future version 2.0 will allow the engineer to choose to take a remediation action against the vulnerability, and have a change request automatically submitted for approval and review.
 
 ## What This Solution Does
 
@@ -226,6 +226,7 @@ cd infra/terraform
 terraform init
 terraform fmt
 terraform validate
+Copy-Item terraform.tfvars.example terraform.tfvars
 terraform plan -var-file="terraform.tfvars"
 ```
 
@@ -238,6 +239,11 @@ Workflows included:
 - `function-deploy.yml`
 
 Use GitHub OIDC only. No client secrets are required.
+
+## Repository Hygiene Notes
+
+- `infra/terraform/.terraform/` and Python `__pycache__/` folders are local build/runtime artefacts and should not be committed.
+- Use `terraform.tfvars.example` as the template for local configuration, then create an untracked `terraform.tfvars` file for real values.
 
 ## Testing
 

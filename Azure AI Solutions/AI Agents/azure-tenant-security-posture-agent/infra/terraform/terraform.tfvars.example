@@ -1,0 +1,41 @@
+subscription_id = "00000000-0000-0000-0000-000000000000"
+tenant_id       = "00000000-0000-0000-0000-000000000000"
+
+location            = "australiaeast"
+environment         = "dev"
+resource_group_name = "rg-tenantsecagent-dev-aue"
+
+storage_account_name         = "sttenantsecagentaue01"
+key_vault_name               = "kv-tenantsecagent-aue01"
+log_analytics_workspace_name = "log-tenantsecagent-dev-aue"
+application_insights_name    = "appi-tenantsecagent-dev-aue"
+service_plan_name            = "asp-tenantsecagent-dev-aue"
+function_app_name            = "func-tenantsecagent-dev-aue"
+identity_name                = "id-tenantsecagent-dev-aue"
+openai_account_name          = "oai-tenantsecagent-aue01"
+
+model_deployment_name = "gpt-4-1-mini-security-agent"
+model_name            = "gpt-4.1-mini"
+model_version         = "2025-04-14"
+model_sku_name        = "GlobalStandard"
+model_capacity        = 10
+
+budget_amount         = 100
+budget_contact_emails = ["you@example.com"]
+
+report_mailbox_from = "security-reports@example.com"
+report_mailbox_to   = "platform-team@example.com,security-team@example.com"
+
+teams_summary_webhook_url = "https://your-teams-summary-endpoint"
+teams_qna_shared_secret   = "replace-with-a-strong-secret"
+
+# Root management group resource ID or the chosen tenant-wide scan scope.
+scan_scope = "/providers/Microsoft.Management/managementGroups/your-root-mg"
+
+tags = {
+  workload      = "azure-tenant-security-specialist-agent"
+  environment   = "dev"
+  owner         = "you@example.com"
+  cost-control  = "add-cost-code"
+  deployed-with = "terraform"
+}

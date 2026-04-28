@@ -3,8 +3,8 @@ name: Terraform Check
 on:
   pull_request:
     paths:
-      - "infra/terraform/**"
-      - ".github/workflows/terraform-check.yml"
+      - "Azure AI Solutions/AI Agents/azure-tenant-security-posture-agent/infra/terraform/**"
+      - "Azure AI Solutions/AI Agents/azure-tenant-security-posture-agent/.github/workflows/terraform-check.yml"
   workflow_dispatch:
 
 permissions:
@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 env:
-  TF_WORKING_DIR: infra/terraform
+  TF_WORKING_DIR: Azure AI Solutions/AI Agents/azure-tenant-security-posture-agent/infra/terraform
 
 jobs:
   terraform-check:
@@ -37,9 +37,8 @@ jobs:
 
       - name: Terraform init
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform init
+        run: terraform init -input=false
 
       - name: Terraform validate
         working-directory: ${{ env.TF_WORKING_DIR }}
         run: terraform validate
-

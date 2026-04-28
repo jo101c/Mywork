@@ -17,6 +17,7 @@ It demonstrates end-to-end platform design, including:
 * Terraform backend (launchpad pattern)
 * Monitoring and alerting modules
 * AI governance advisory agents
+* AI-assisted tenant security posture monitoring
 * Microsoft Foundry / Azure OpenAI integration
 * Cost-conscious AI implementation patterns
 * CI/CD and DevSecOps practices
@@ -29,6 +30,7 @@ It demonstrates end-to-end platform design, including:
 Azure AI Solutions/
   AI Agents/
     azure-lz-governance-advisor/
+    azure-tenant-security-posture-agent/
 
 Azure Landing Zone/
   app-landing-zone-subscription-vending/
@@ -46,10 +48,10 @@ Terraform Modules/
 ### AI Solutions
 
 * `azure-lz-governance-advisor` demonstrates an Azure AI governance agent that reviews landing zone evidence against Cloud Adoption Framework guidance
-* Uses Microsoft Foundry, Azure OpenAI, Terraform scaffolding, and GitHub OIDC workflows
-* Produces governance findings, missing evidence, and 30/60/90-day remediation roadmaps
-* Designed as a portfolio-ready, low-cost AI implementation that complements the platform engineering projects in this repository
-* See the project README for the full walkthrough and setup details
+* `azure-tenant-security-posture-agent` demonstrates a daily Azure tenant security posture agent that scans findings, generates reports, and supports follow-up Q&A
+* Together, the AI projects use Microsoft Foundry / Azure OpenAI, Terraform scaffolding, and GitHub OIDC workflows
+* They showcase both cost-conscious AI implementation patterns and secure Azure-native automation for governance and security operations
+* See each project README for the full walkthrough and setup details
 
 ---
 
@@ -92,8 +94,10 @@ Terraform Modules/
 * Terraform module architecture at scale
 * Cloud governance and subscription lifecycle management
 * Applied AI for governance automation
+* AI-assisted tenant security posture assessment
 * Prompt engineering and AI solution design
 * Azure AI architecture using Microsoft Foundry / Azure OpenAI
+* Azure Functions-based AI automation for security operations
 * DevOps and CI/CD integration
 * Real-world platform engineering patterns
 

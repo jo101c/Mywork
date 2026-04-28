@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "infra/terraform/**"
-      - ".github/workflows/terraform-apply.yml"
+      - "Azure AI Solutions/AI Agents/azure-tenant-security-posture-agent/infra/terraform/**"
+      - "Azure AI Solutions/AI Agents/azure-tenant-security-posture-agent/.github/workflows/terraform-apply.yml"
   workflow_dispatch:
 
 permissions:
@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 env:
-  TF_WORKING_DIR: infra/terraform
+  TF_WORKING_DIR: Azure AI Solutions/AI Agents/azure-tenant-security-posture-agent/infra/terraform
 
 jobs:
   terraform-apply:
@@ -36,9 +36,8 @@ jobs:
 
       - name: Terraform init
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform init
+        run: terraform init -input=false
 
       - name: Terraform apply
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform apply -auto-approve
-
+        run: terraform apply -auto-approve -input=false

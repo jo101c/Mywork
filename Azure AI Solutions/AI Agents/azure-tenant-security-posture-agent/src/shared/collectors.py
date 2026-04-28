@@ -8,7 +8,7 @@ from shared.arg_queries import (
     PUBLIC_STORAGE_ACCESS_QUERY,
     SQL_PUBLIC_ACCESS_QUERY,
 )
-from shared.azure_clients import arm_get, query_resource_graph
+from shared.azure_clients import arm_get, arm_post, query_resource_graph
 from shared.models import Finding
 
 
@@ -192,4 +192,3 @@ def collect_custom_posture_findings(subscriptions: list[str]) -> list[Finding]:
         )
     )
     return findings
-

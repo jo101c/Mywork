@@ -45,8 +45,6 @@ def run_daily_scan(past_due: bool) -> None:
     scan_run.report_blob_name = report_blob
     scan_run.report_download_url = generate_secure_download_url(settings.report_container, report_blob)
     upload_json(settings.findings_container, "latest.json", scan_run.to_dict())
-    upload_json(settings.findings_container, findings_blob, scan_run.to_dict())
 
     send_report_mail(pdf_bytes, f"{run_id}-security-report.pdf", scan_run.ai_summary_markdown)
     post_summary(scan_run)
-
